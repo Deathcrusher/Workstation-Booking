@@ -7,8 +7,8 @@ import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/auth.routes';
 import bandRoutes from './routes/band.routes';
 import roomRoutes from './routes/room.routes';
-import bookingRoutes from './routes/bookingRoutes';
-import adminRoutes from './routes/adminRoutes';
+import bookingRoutes from './routes/booking.routes';
+import adminRoutes from './routes/admin.routes';
 
 // Import middleware
 import { authenticate, requireAdmin } from './middleware/authMiddleware';

@@ -5,12 +5,12 @@ import {
   updateBooking,
   deleteBooking,
 } from '../controllers/booking.controller';
-import { authenticateToken } from '../middleware/auth';
+import { authenticate } from '../middleware/authMiddleware';
 
 const router = Router();
 
 // All routes require authentication
-router.use(authenticateToken);
+router.use(authenticate);
 
 router.post('/', createBooking);
 router.get('/', getBookings);

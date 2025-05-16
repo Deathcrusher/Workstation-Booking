@@ -45,39 +45,64 @@ export const login = createAsyncThunk<
   'auth/login',
   async (credentials) => {
     const { data } = await api.post<LoginResponse>('/auth/login', credentials);
+    
+    // Validate the token content before storing it
+    if (!data.token || !data.user || !data.user.id) {
+      throw new Error('Invalid authentication response');
+    }
+    
     localStorage.setItem('token', data.token);
     return data;
   }
 );
 
-export const logout = createAsyncThunk('auth/logout', async () => {
-  localStorage.removeItem('token');
-});
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async () => {
+    localStorage.removeItem('token');
+    // No need to call an API for logout in this implementation
+    return true;
+  }
+);
 
+// Validate token on app startup or when needed
 export const validateToken = createAsyncThunk<
-  AuthResponse,
+  { user: User; token: string },
   void,
+  { state: RootState }
+>(
+  'auth/validateToken',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const { auth } = getState();
+      const token = auth.token;
+      
+      if (!token) {
+        return rejectWithValue('No token available');
+      }
+      
+      const { data } = await api.get<{ user: User; message: string }>('/auth/validate-token');
+      
+      // Return both the user and the original token
+      return { 
+        user: data.user,
+        token: token
+      };
+    } catch (error) {
+      console.error('Token validation error:', error);
+      // Don't throw the error - just return rejectWithValue
+      // This allows the app to handle auth failures more gracefully
+      return rejectWithValue('Token validation failed');
+    }
+  },
   {
-    rejectWithValue: string;
-    state: RootState;
+    // Add condition to only run if we have a token
+    condition: (_, { getState }) => {
+      const { auth } = getState();
+      return !!auth.token;
+    }
   }
->('auth/validateToken', async (_, { rejectWithValue, getState }) => {
-  const tokenFromState = getState().auth.token;
-  if (!tokenFromState) {
-    return rejectWithValue('No token found in state for validation');
-  }
-
-  try {
-    const { data } = await api.get<{ message: string, user: User }>('/auth/validate');
-    return {
-      token: tokenFromState,
-      user: data.user
-    };
-  } catch (error) {
-    console.warn('validateToken failed, but token is kept for now:', error);
-    return rejectWithValue('Invalid token on backend validation');
-  }
-});
+);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -123,16 +148,20 @@ const authSlice = createSlice({
       .addCase(validateToken.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.user = action.payload.user;
+        state.loading = false;
         if (action.payload.token !== state.token) {
             state.token = action.payload.token;
             localStorage.setItem('token', action.payload.token);
         }
       })
       .addCase(validateToken.rejected, (state, action) => {
-        state.isAuthenticated = false;
-        state.user = null;
-        state.error = action.payload as string || 'Token validation failed';
-        console.warn('validateToken.rejected: User set to not authenticated, token kept.');
+        // Don't immediately clear auth state on first validation failure
+        // This prevents immediate logout but marks auth as potentially invalid
+        state.loading = false;
+        console.warn('Token validation failed:', action.payload);
+        
+        // We'll only clear auth if explicitly told to do so
+        // This prevents logout loops during temporary API issues
       });
   },
 });

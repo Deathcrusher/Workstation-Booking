@@ -7,6 +7,8 @@ const prisma = new PrismaClient();
 interface JwtPayload {
   userId: string;
   role: string;
+  bandId?: string;
+  email?: string;
 }
 
 declare global {
@@ -43,7 +45,13 @@ export const authenticateToken = async (
       return res.status(401).json({ message: 'User not found' });
     }
 
-    req.user = decoded;
+    req.user = {
+      userId: user.id,
+      role: user.role,
+      bandId: user.bandId || undefined,
+      email: user.email
+    };
+
     return next();
   } catch (error) {
     return res.status(403).json({ message: 'Invalid token' });

@@ -9,6 +9,7 @@ import {
   BuildingOfficeIcon,
   CalendarIcon,
   ArrowRightOnRectangleIcon,
+  UserIcon,
 } from '@heroicons/react/24/outline';
 
 interface AdminLayoutProps {
@@ -24,6 +25,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     { name: 'Dashboard', href: '/admin', icon: HomeIcon },
     { name: 'Bands', href: '/admin/bands', icon: UserGroupIcon },
     { name: 'Rooms', href: '/admin/rooms', icon: BuildingOfficeIcon },
+    { name: 'Users', href: '/admin/users', icon: UserIcon },
     { name: 'Calendar', href: '/admin/calendar', icon: CalendarIcon },
   ];
 

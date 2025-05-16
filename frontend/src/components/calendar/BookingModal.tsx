@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
@@ -77,16 +77,34 @@ const BookingModal = ({
     }
   }, [selectedDate, selectedRoomId, existingBooking]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
-  };
+  }, [formData, onSubmit]);
+
+  const handleBackdropClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    // Only close if the backdrop itself was clicked, not its children
+    if (e.currentTarget === e.target) {
+      onClose();
+    }
+  }, [onClose]);
+
+  const handleModalContentClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    // Prevent click from propagating to backdrop
+    e.stopPropagation();
+  }, []);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={handleBackdropClick}
+    >
+      <div 
+        className="bg-gray-800 rounded-lg p-6 w-full max-w-md"
+        onClick={handleModalContentClick}
+      >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold text-white">
             {existingBooking ? 'Edit Booking' : 'New Booking'}
@@ -94,6 +112,7 @@ const BookingModal = ({
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-white"
+            aria-label="Close modal"
           >
             <XMarkIcon className="h-6 w-6" />
           </button>

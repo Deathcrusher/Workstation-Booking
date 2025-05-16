@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../utils/axios';
 
-interface Band {
+export interface Band {
   id: string;
   name: string;
   contactEmail: string;

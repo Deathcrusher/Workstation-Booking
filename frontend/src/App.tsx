@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import Calendar from './pages/Calendar';
 import Bands from './pages/admin/Bands';
 import RoomsPage from './pages/admin/RoomsPage';
+import UsersPage from './pages/admin/UsersPage';
 import AdminDashboard from './pages/admin/Dashboard';
 
 const App = () => {
@@ -77,6 +78,16 @@ const App = () => {
             <AdminRoute>
               <AdminLayout>
                 <RoomsPage />
+              </AdminLayout>
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <AdminRoute>
+              <AdminLayout>
+                <UsersPage />
               </AdminLayout>
             </AdminRoute>
           }

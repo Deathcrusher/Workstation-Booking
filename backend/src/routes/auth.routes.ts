@@ -8,6 +8,6 @@ router.post('/login', login);
 router.post('/request-reset', requestPasswordReset);
 router.post('/reset-password', resetPassword);
 
-router.get('/validate', authenticate, validateTokenHandler);
+router.get('/validate-token', authenticate, validateTokenHandler);
 
 export default router; 

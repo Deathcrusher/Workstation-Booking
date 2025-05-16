@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 interface AuthRequest extends Request {
   user?: {
@@ -10,7 +13,7 @@ interface AuthRequest extends Request {
   };
 }
 
-export const authenticate = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const authenticate = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     console.log('Auth headers:', req.headers.authorization);
     const token = req.headers.authorization?.split(' ')[1];
@@ -28,7 +31,28 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
     };
     
     console.log('Token decoded successfully:', { userId: decoded.userId, role: decoded.role });
-    req.user = decoded;
+    
+    if (!decoded.userId) {
+      console.log('Empty userId in token');
+      return res.status(401).json({ message: 'Invalid token: missing user ID' });
+    }
+    
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+    });
+
+    if (!user) {
+      console.log('User not found in database');
+      return res.status(401).json({ message: 'User not found' });
+    }
+    
+    req.user = {
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      bandId: user.bandId || undefined
+    };
+    
     return next();
   } catch (error) {
     console.error('Token verification error:', error);

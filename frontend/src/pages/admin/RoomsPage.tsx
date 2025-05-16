@@ -9,7 +9,9 @@ import {
   PencilIcon,
   TrashIcon,
   XMarkIcon,
+  UsersIcon,
 } from '@heroicons/react/24/outline';
+import RoomAssignmentForm from '../../components/admin/RoomAssignmentForm';
 
 const RoomsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,6 +28,8 @@ const RoomsPage = () => {
   });
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
+  const [assigningRoom, setAssigningRoom] = useState<Room | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -121,6 +125,14 @@ const RoomsPage = () => {
         ? prev.features.filter((f) => f !== feature)
         : [...prev.features, feature],
     }));
+  };
+
+  // Close all modals function
+  const closeAllModals = () => {
+    setIsModalOpen(false);
+    setIsAssignModalOpen(false);
+    setEditingRoom(null);
+    setAssigningRoom(null);
   };
 
   if (roomsLoading || bandsLoading) {
@@ -263,6 +275,16 @@ const RoomsPage = () => {
                             </div>
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                            <button
+                              onClick={() => {
+                                setAssigningRoom(room);
+                                setIsAssignModalOpen(true);
+                              }}
+                              className="text-blue-500 hover:text-blue-600 mr-4"
+                              title="Manage room assignments"
+                            >
+                              <UsersIcon className="h-5 w-5" />
+                            </button>
                             <button
                               onClick={() => {
                                 setEditingRoom(room);
@@ -441,6 +463,22 @@ const RoomsPage = () => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Room Assignment Modal */}
+        {isAssignModalOpen && assigningRoom && (
+          <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
+            <div className="w-full max-w-md mx-auto">
+              <RoomAssignmentForm
+                roomId={assigningRoom.id}
+                currentBandIds={assigningRoom.bands.map(band => band.id)}
+                onClose={() => {
+                  setIsAssignModalOpen(false);
+                  setAssigningRoom(null);
+                }}
+              />
             </div>
           </div>
         )}

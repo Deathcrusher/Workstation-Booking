@@ -19,12 +19,19 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     console.log(`Login: User role from DB for ${email}: ${user.role}`);
+    console.log(`Login: User ID from DB for ${email}: ${user.id}`);
     const validPassword = await bcrypt.compare(password, user.password);
     console.log('Password valid:', validPassword);
     if (!validPassword) {
       console.log('Invalid password for user:', email);
       return res.status(401).json({ message: 'Invalid credentials' });
     }
+    
+    if (!user.id) {
+      console.error('User found but has no ID:', user);
+      return res.status(500).json({ message: 'Authentication error: Invalid user data' });
+    }
+    
     const token = jwt.sign(
       {
         userId: user.id,
@@ -36,6 +43,8 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       { expiresIn: '24h' }
     );
     console.log('Login successful for:', email, 'with role:', user.role);
+    console.log('Token payload:', { userId: user.id, role: user.role });
+    
     return res.json({
       token,
       user: {
