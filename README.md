@@ -86,7 +86,7 @@ A web application for managing band rehearsal room bookings, built with React, N
 
 5. Access the application:
    - Frontend: http://localhost:5173 (or another port if 5173 is in use)
-   - Backend API: http://localhost:4000
+   - Backend API: http://localhost:3000
 
 ## Development
 
