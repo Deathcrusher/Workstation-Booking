@@ -45,7 +45,7 @@ A web application for managing band rehearsal room bookings, built with React, N
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd workstation-time-booking-system
+   cd Workstation-Booking
    ```
 
 2. Install dependencies:
@@ -121,6 +121,11 @@ A web application for managing band rehearsal room bookings, built with React, N
    npm run build
    ```
 
+3. Lint the code:
+   ```bash
+   npm run lint
+   ```
+
 ### Database Development
 
 1. Database setup for SQLite (default):
@@ -160,7 +165,7 @@ A web application for managing band rehearsal room bookings, built with React, N
 
 2. Build and start Docker containers:
    ```bash
-   docker-compose -f docker-compose.prod.yml up -d
+   docker-compose up -d
    ```
 
 ## Project Structure
