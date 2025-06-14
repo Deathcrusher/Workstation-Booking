@@ -7,4 +7,6 @@ declare module 'express-serve-static-core' {
       bandId?: string;
     };
   }
-} 
+}
+
+export {};
