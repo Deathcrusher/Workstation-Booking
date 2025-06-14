@@ -6,17 +6,17 @@ import {
   updateBand,
   deleteBand,
 } from '../controllers/band.controller';
-import { authenticateToken, isAdmin } from '../middleware/auth';
+import { authenticate, requireAdmin } from '../middleware/authMiddleware';
 
 const router = Router();
 
 // All routes require authentication
-router.use(authenticateToken);
+router.use(authenticate);
 
 // Admin only routes
-router.post('/', isAdmin, createBand);
-router.put('/:id', isAdmin, updateBand);
-router.delete('/:id', isAdmin, deleteBand);
+router.post('/', requireAdmin, createBand);
+router.put('/:id', requireAdmin, updateBand);
+router.delete('/:id', requireAdmin, deleteBand);
 
 // Routes accessible by both admin and band users
 router.get('/', getBands);
