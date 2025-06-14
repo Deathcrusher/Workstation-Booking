@@ -74,6 +74,26 @@ const CalendarPage = () => {
     localStorage.getItem('preferredRoomId')
   );
   const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [calendarView, setCalendarView] =
+    useState<'timeGridWeek' | 'listWeek'>(
+      typeof window !== 'undefined' && window.innerWidth < 640
+        ? 'listWeek'
+        : 'timeGridWeek'
+    );
+  const calendarRef = useRef<any>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const view = window.innerWidth < 640 ? 'listWeek' : 'timeGridWeek';
+      setCalendarView(view);
+      if (calendarRef.current) {
+        calendarRef.current.getApi().changeView(view);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -248,7 +268,7 @@ const CalendarPage = () => {
           </button>
         </div>
         
-        <div className="bg-gray-800 rounded-lg p-4 relative">
+        <div className="bg-gray-800 rounded-lg p-4 relative overflow-x-auto">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70 z-10 rounded-lg">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
@@ -257,8 +277,9 @@ const CalendarPage = () => {
           
           {/* @ts-ignore - Bypass FullCalendar typing issues */}
           <FullCalendar
+            ref={calendarRef}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-            initialView="timeGridWeek"
+            initialView={calendarView}
             headerToolbar={{
               left: 'prev,next today',
               center: 'title',
