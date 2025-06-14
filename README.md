@@ -107,6 +107,12 @@ A web application for managing band rehearsal room bookings, built with React, N
    ```bash
    ./scripts/test-backend.sh
    ```
+
+4. Lint the code:
+   ```bash
+   cd backend
+   npm run lint
+   ```
   
 ### Frontend Development
 
