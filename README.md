@@ -88,6 +88,25 @@ A web application for managing band rehearsal room bookings, built with React, N
    - Frontend: http://localhost:5173 (or another port if 5173 is in use)
    - Backend API: http://localhost:3000
 
+## Backend Environment Variables
+
+The backend relies on several environment variables for authentication,
+database access and email notifications. The most common ones are:
+
+- `JWT_SECRET` – secret used to sign JWT tokens
+- `JWT_EXPIRES_IN` – token expiry time
+- `DATABASE_URL` – connection URL for your database
+- `SMTP_HOST` – address of your SMTP server
+- `SMTP_PORT` – port for the SMTP server
+- `SMTP_USER` – SMTP username
+- `SMTP_PASS` – SMTP password
+- `PORT` – port where the backend listens
+
+Create a `.env` file in `backend/` (see `backend/.env.example`) and define
+these variables there. When running the Docker setup, the same variables are
+referenced in `docker-compose.yml` and can also be configured through your
+environment.
+
 ## Development
 
 ### Backend Development
