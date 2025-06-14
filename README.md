@@ -59,7 +59,14 @@ A web application for managing band rehearsal room bookings, built with React, N
    npm install
    ```
 
-3. Set up environment variables:
+3. Generate Prisma client and create the default admin user:
+   ```bash
+   cd backend
+   npx prisma generate
+   npx ts-node prisma/fix-admin.ts
+   cd ..
+   ```
+4. Set up environment variables:
    ```bash
    # Backend
    cp backend/.env.example backend/.env
