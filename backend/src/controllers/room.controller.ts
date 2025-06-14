@@ -6,7 +6,8 @@ const prisma = new PrismaClient();
 export const createRoom = async (req: Request, res: Response) => {
   console.log('Attempting to create room with body:', req.body);
   try {
-    let { name, location, features, color } = req.body;
+    const { name, location, color } = req.body;
+    let { features } = req.body;
 
     if (!name) {
       console.log('Validation failed: Room name is missing');
@@ -73,7 +74,8 @@ export const updateRoom = async (req: Request, res: Response) => {
   console.log(`Attempting to update room with ID: ${req.params.id}, body:`, req.body);
   try {
     const { id } = req.params;
-    let { name, location, features, color } = req.body;
+    const { name, location, color } = req.body;
+    let { features } = req.body;
 
     // Convert features array to a comma-separated string if it's an array
     if (Array.isArray(features)) {

@@ -75,7 +75,8 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
     });
 
     // Remove password from response
-    const { password: _, ...userWithoutPassword } = user;
+    const { password: createdPassword, ...userWithoutPassword } = user;
+    void createdPassword;
     return res.status(201).json(userWithoutPassword);
   } catch (error) {
     console.error('Create user error:', error);
@@ -104,7 +105,12 @@ export const updateUser = async (req: Request, res: Response): Promise<Response>
     }
 
     // Prepare update data
-    const updateData: any = {
+    const updateData: {
+      email?: string;
+      role?: string;
+      bandId?: string | null;
+      password?: string;
+    } = {
       email: email || undefined,
       role: role || undefined,
       bandId: role === 'BAND' ? bandId : null,
@@ -125,7 +131,8 @@ export const updateUser = async (req: Request, res: Response): Promise<Response>
     });
 
     // Remove password from response
-    const { password: _, ...userWithoutPassword } = updatedUser;
+    const { password: updatedPassword, ...userWithoutPassword } = updatedUser;
+    void updatedPassword;
     return res.json(userWithoutPassword);
   } catch (error) {
     console.error('Update user error:', error);
