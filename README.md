@@ -70,6 +70,8 @@ A web application for managing band rehearsal room bookings, built with React, N
    # Edit frontend/.env with your configuration
    ```
 
+   After copying the example file, update `VITE_API_URL` in `frontend/.env` if your backend runs on a different host or port.
+
 4. Start the development environment:
    ```bash
    # Using SQLite (default configuration)
