@@ -19,7 +19,7 @@ services:
     image: postgres:14-alpine
     environment:
       POSTGRES_USER: user
-      POSTGS_PASSWORD: password
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: booking_system
     volumes:
       - db_data:/var/lib/postgresql/data
