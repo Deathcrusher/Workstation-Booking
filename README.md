@@ -101,7 +101,7 @@ A web application for managing band rehearsal room bookings, built with React, N
    npx prisma generate
    ```
 
-3. Run tests:
+3. Run tests (located in `backend/tests`):
    ```bash
    ./scripts/test-backend.sh
    ```
