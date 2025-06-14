@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { RootState, AppDispatch } from '../store';
 import { fetchBookings } from '../store/slices/bookingSlice';
 import { fetchRooms } from '../store/slices/roomSlice';
 import { fetchBands } from '../store/slices/bandSlice';
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((state: RootState) => state.auth);
   const { bookings, loading: bookingsLoading } = useSelector(
     (state: RootState) => state.bookings
@@ -38,10 +38,10 @@ const Dashboard = () => {
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
-              Welcome, {user?.name}
+              Welcome, {user?.email}
             </h3>
             <p className="mt-1 text-sm text-gray-500">
-              {user?.isAdmin
+              {user?.role === 'ADMIN'
                 ? 'You have access to all features as an administrator.'
                 : 'You can view and manage your band bookings.'}
             </p>

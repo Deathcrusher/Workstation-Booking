@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
+import axios from 'axios';
 
 // Create axios instance with base URL
 const api = axios.create({
@@ -21,14 +21,14 @@ const processQueue = (error: any = null) => {
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
-  (config: AxiosRequestConfig): AxiosRequestConfig => {
+  (config) => {
     const token = localStorage.getItem('token');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error: AxiosError) => {
+  (error) => {
     return Promise.reject(error);
   }
 );
@@ -45,9 +45,9 @@ interface RefreshTokenResponse {
 
 // Response interceptor to handle auth errors
 api.interceptors.response.use(
-  (response: AxiosResponse) => response,
-  async (error: AxiosError<ErrorResponseData>) => {
-    const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config as any & { _retry?: boolean };
     
     if (error.response) {
       const { status, data } = error.response;
@@ -107,8 +107,8 @@ api.interceptors.response.use(
       if (status === 422) {
         // Handle validation errors
         if (data && data.errors) {
-          const errorMessage = Object.entries(data.errors)
-            .map(([field, messages]: [string, string[]]) => `${field}: ${messages.join(', ')}`)
+          const errorMessage = Object.entries(data.errors as Record<string, string[]>)
+            .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
             .join('\n');
           return Promise.reject(new Error(errorMessage));
         }
@@ -135,3 +135,5 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+
