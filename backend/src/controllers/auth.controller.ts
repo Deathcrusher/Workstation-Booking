@@ -105,7 +105,7 @@ export const validateTokenHandler = async (req: Request, res: Response): Promise
   // and attached user information to req.user.
   
   // The JWT payload is expected to be on req.user (set by authMiddleware)
-  // @ts-ignore // Suppress TypeScript error for req.user until Express.Request is augmented
+  // @ts-expect-error -- Express.Request is augmented with user property elsewhere
   const tokenUser = req.user;
 
   if (!tokenUser || !tokenUser.userId) {

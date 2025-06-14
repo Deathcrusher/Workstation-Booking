@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import nodemailer from 'nodemailer';
 
 const prisma = new PrismaClient();
@@ -154,7 +154,7 @@ export const getBookings = async (req: Request, res: Response): Promise<Response
     const { start, end, roomId } = req.query;
     const bandId = req.user?.bandId;
 
-    const where: any = {};
+    const where: Prisma.BookingWhereInput = {};
     
     // Date range filter
     if (start && end) {

@@ -35,11 +35,13 @@ app.use('/api/admin', authenticate, requireAdmin, adminRoutes);
 
 // Basic health check route
 app.get('/health', (_req: Request, res: Response) => {
+  // @ts-expect-error - middleware typing
   res.json({ status: 'ok' });
 });
 
 // Additional health check route
-app.get('/api/health', (_req, res) => {
+app.get('/api/health', (_req: Request, res: Response) => {
+  // @ts-expect-error - middleware typing
   res.json({ status: 'ok' });
 });
 
