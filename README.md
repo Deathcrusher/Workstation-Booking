@@ -103,9 +103,9 @@ A web application for managing band rehearsal room bookings, built with React, N
 
 3. Run tests:
    ```bash
-   npm test
+   ./scripts/test-backend.sh
    ```
-
+  
 ### Frontend Development
 
 1. Start development server:

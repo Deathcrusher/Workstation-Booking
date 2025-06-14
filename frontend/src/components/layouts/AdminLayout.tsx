@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { logout } from '../../store/slices/authSlice';
+import ThemeToggle from '../ThemeToggle';
 import {
   HomeIcon,
   UserGroupIcon,
@@ -35,11 +36,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gray-900 dark:bg-gray-900">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 bg-gray-800">
-        <div className="flex h-16 items-center justify-center border-b border-gray-700">
+      <div className="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-primary-700 via-primary-800 to-gray-900 dark:from-gray-800 dark:via-gray-900 dark:to-black">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-gray-700">
           <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
+          <ThemeToggle />
         </div>
         <nav className="mt-5 px-2">
           {navigation.map((item) => {
@@ -74,7 +76,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       </div>
 
       {/* Main content */}
-      <div className="pl-64">
+      <div className="pl-64 bg-gray-100 dark:bg-gray-900 min-h-screen">
         <main className="py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
         </main>
