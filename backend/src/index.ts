@@ -44,7 +44,7 @@ app.get('/api/health', (_req, res) => {
 });
 
 // Start server when executed directly
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
