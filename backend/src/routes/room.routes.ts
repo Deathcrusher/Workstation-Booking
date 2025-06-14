@@ -7,18 +7,18 @@ import {
   deleteRoom,
   assignBandsToRoom,
 } from '../controllers/room.controller';
-import { authenticateToken, isAdmin } from '../middleware/auth';
+import { authenticate, requireAdmin } from '../middleware/authMiddleware';
 
 const router = Router();
 
 // All routes require authentication
-router.use(authenticateToken);
+router.use(authenticate);
 
 // Admin only routes
-router.post('/', isAdmin, createRoom);
-router.put('/:id', isAdmin, updateRoom);
-router.delete('/:id', isAdmin, deleteRoom);
-router.post('/:roomId/assign-bands', isAdmin, assignBandsToRoom);
+router.post('/', requireAdmin, createRoom);
+router.put('/:id', requireAdmin, updateRoom);
+router.delete('/:id', requireAdmin, deleteRoom);
+router.post('/:roomId/assign-bands', requireAdmin, assignBandsToRoom);
 
 // Routes accessible by both admin and band users
 router.get('/', getRooms);
