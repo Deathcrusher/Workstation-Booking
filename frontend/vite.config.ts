@@ -13,5 +13,13 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173,
+    // Proxy API requests to the backend during development.
+    // This allows the app to work even if VITE_API_URL is not set.
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
   },
-}); 
+});
