@@ -2,12 +2,14 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
+import { log } from '../utils/logger';
 
 const prisma = new PrismaClient();
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
   try {
     console.log('Login attempt:', req.body);
+    log(`Login attempt: ${JSON.stringify(req.body)}`);
     const { email, password } = req.body;
     const user = await prisma.user.findUnique({
       where: { email },
@@ -16,6 +18,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     console.log('User found for login:', !!user);
     if (!user) {
       console.log('No user found for email:', email);
+      log(`Login failed: no user for ${email}`);
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     console.log(`Login: User role from DB for ${email}: ${user.role}`);
@@ -24,11 +27,13 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     console.log('Password valid:', validPassword);
     if (!validPassword) {
       console.log('Invalid password for user:', email);
+      log(`Login failed: invalid password for ${email}`);
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     
     if (!user.id) {
       console.error('User found but has no ID:', user);
+      log(`Login error: user record missing ID for ${email}`);
       return res.status(500).json({ message: 'Authentication error: Invalid user data' });
     }
     
@@ -44,6 +49,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     );
     console.log('Login successful for:', email, 'with role:', user.role);
     console.log('Token payload:', { userId: user.id, role: user.role });
+    log(`Login success for ${email} as ${user.role}`);
     
     return res.json({
       token,
@@ -56,6 +62,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     });
   } catch (error) {
     console.error('Login error:', error);
+    log(`Login exception: ${String(error)}`);
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
