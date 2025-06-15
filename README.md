@@ -82,8 +82,11 @@ A web application for managing band rehearsal room bookings, built with React, N
   # Edit frontend/.env with your configuration
   ```
 
-  After copying the example file, update `VITE_API_URL` in `frontend/.env` if your backend runs on a different host or port. When using
-  `docker-compose`, the backend is available on `http://localhost:3000/api`.
+  After copying the example file, you can set `VITE_API_URL` in `frontend/.env` if
+  your backend runs on a different host or port. When left empty, the frontend
+  defaults to the relative path `/api`, which works as long as the backend is
+  reachable from the same host. With `docker-compose`, the backend is available
+  at `http://localhost:3000`.
 
 4. Start the development environment:
    ```bash
