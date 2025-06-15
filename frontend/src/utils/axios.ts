@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 // Create axios instance with base URL
-// If VITE_API_URL is not set, default to '/api'
+// If VITE_API_URL is not set, default to the local backend.
+// This helps avoid login failures when the frontend is started
+// without a configured environment file.
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
 });
 
 let isRefreshing = false;
