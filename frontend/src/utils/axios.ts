@@ -5,7 +5,11 @@ import axios from 'axios';
 // This helps avoid login failures when the frontend is started
 // without a configured environment file.
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
+  // If no VITE_API_URL is provided, default to using a relative
+  // path so the frontend communicates with the same host that served
+  // the application. This avoids hard coding "localhost" which breaks
+  // when accessing the app via an IP or different domain.
+  baseURL: import.meta.env.VITE_API_URL || '/api',
 });
 
 let isRefreshing = false;
