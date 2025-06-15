@@ -31,12 +31,17 @@ services:
     command: sh -c "npx prisma migrate deploy && npm run start:prod"
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        # The frontend is served to the host's browser, so it must talk to
+        # localhost to reach the backend exposed on port 3000.
+        - VITE_API_URL=http://localhost:3000/api
     ports:
       - "5173:80"
     environment:
-      # Point the frontend to the backend service when running with Docker
-      VITE_API_URL: http://backend:3000/api
+      # Point the frontend to the backend running on the host
+      VITE_API_URL: http://localhost:3000/api
     depends_on:
       - backend
 

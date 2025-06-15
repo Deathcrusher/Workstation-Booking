@@ -78,11 +78,12 @@ A web application for managing band rehearsal room bookings, built with React, N
    # Set DATABASE_URL to your PostgreSQL connection string
 
    # Frontend
-   cp frontend/.env.example frontend/.env
-   # Edit frontend/.env with your configuration
-   ```
+  cp frontend/.env.example frontend/.env
+  # Edit frontend/.env with your configuration
+  ```
 
-   After copying the example file, update `VITE_API_URL` in `frontend/.env` if your backend runs on a different host or port.
+  After copying the example file, update `VITE_API_URL` in `frontend/.env` if your backend runs on a different host or port. When using
+  `docker-compose`, the backend is available on `http://localhost:3000/api`.
 
 4. Start the development environment:
    ```bash
