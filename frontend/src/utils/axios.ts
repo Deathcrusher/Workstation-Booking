@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // Create axios instance with base URL
+// If VITE_API_URL is not set, default to '/api'
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || '/api',
 });
 
 let isRefreshing = false;

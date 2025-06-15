@@ -24,7 +24,10 @@ const Login = () => {
           navigate('/calendar');
         }
       })
-      .catch((err: unknown) => setError('Invalid email or password'));
+      .catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : 'Login failed';
+        setError(message);
+      });
   };
 
   return (
