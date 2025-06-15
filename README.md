@@ -29,8 +29,8 @@ A web application for managing band rehearsal room bookings, built with React, N
 - TypeScript
 - Prisma ORM
 - Database: 
-  - SQLite (current development database)
-  - Support for PostgreSQL, MySQL or other SQL databases via Prisma
+  - PostgreSQL (current development database)
+  - Support for SQLite, MySQL or other SQL databases via Prisma
 - JWT authentication
 - Docker for containerization
 
@@ -75,6 +75,7 @@ A web application for managing band rehearsal room bookings, built with React, N
    # Backend
    cp backend/.env.example backend/.env
    # Edit backend/.env with your configuration
+   # Set DATABASE_URL to your PostgreSQL connection string
 
    # Frontend
    cp frontend/.env.example frontend/.env
@@ -85,12 +86,13 @@ A web application for managing band rehearsal room bookings, built with React, N
 
 4. Start the development environment:
    ```bash
-   # Using SQLite (default configuration)
+   # Using PostgreSQL (default configuration)
+   docker-compose up -d postgres
    cd backend && npm run dev
    cd frontend && npm run dev
 
-   # Or using PostgreSQL with Docker
-   docker-compose up -d postgres
+   # Or using a local PostgreSQL installation
+   # Ensure your DATABASE_URL points to the local instance
    cd backend && npm run dev
    cd frontend && npm run dev
    ```
@@ -134,6 +136,7 @@ environment.
 1. Database migrations:
    ```bash
    cd backend
+   # Ensure DATABASE_URL in .env points to your PostgreSQL database
    npx prisma migrate dev
    ```
 
@@ -173,20 +176,18 @@ environment.
 
 ### Database Development
 
-1. Database setup for SQLite (default):
+1. Database setup for PostgreSQL (default):
    ```bash
    cd backend
-   # The SQLite database will be created automatically when you run the application
-   # To apply migrations:
+   # Edit the DATABASE_URL in .env to point to your PostgreSQL instance
+   # Example: DATABASE_URL="postgresql://postgres:password@localhost:5432/band_booking"
    npx prisma migrate dev
    ```
 
-2. For PostgreSQL setup:
+2. For SQLite setup:
    ```bash
-   # Edit the DATABASE_URL in .env to point to your PostgreSQL instance
-   # Example: DATABASE_URL="postgresql://postgres:password@localhost:5432/band_booking"
-   
-   # Then run migrations
+   # Edit the DATABASE_URL to use a local SQLite file
+   # Example: DATABASE_URL="file:./dev.db"
    npx prisma migrate dev
    ```
 
