@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
+import { ensureDefaultAdmin } from './utils/ensureAdmin';
 
 // Import routes
 import authRoutes from './routes/auth.routes';
@@ -46,9 +47,13 @@ app.get('/api/health', (_req: Request, res: Response) => {
 // Start server when executed directly
 const PORT = process.env.PORT || 3000;
 if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
+  ensureDefaultAdmin(prisma)
+    .catch(err => console.error('Failed to ensure default admin', err))
+    .finally(() => {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    });
 }
 
 // Handle shutdown

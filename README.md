@@ -59,6 +59,10 @@ A web application for managing band rehearsal room bookings, built with React, N
    npm install
    ```
 
+3. Generate the Prisma client (a default admin user will be created on first run):
+   ```bash
+   cd backend
+   npx prisma generate
 3. Generate Prisma client and create the default admin user:
    ```bash
    cd backend
@@ -94,6 +98,10 @@ A web application for managing band rehearsal room bookings, built with React, N
 5. Access the application:
    - Frontend: http://localhost:5173 (or another port if 5173 is in use)
    - Backend API: http://localhost:3000
+
+   The backend will automatically create a default admin account
+   (**admin@admin.com** / **admin**) if none exists. Be sure to change the
+   password after the first login.
 
 ## Backend Environment Variables
 
