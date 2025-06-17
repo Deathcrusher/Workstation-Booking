@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import { RootState } from '../../store';
 
 interface Room {
@@ -23,7 +24,7 @@ const CalendarFilters: React.FC<CalendarFiltersProps> = ({
   const { user } = useSelector((state: RootState) => state.auth);
   
   return (
-    <div className="bg-gray-800 rounded-lg p-4 mb-4">
+    <div className="bg-gray-800/60 backdrop-blur-md rounded-2xl p-4 mb-4 border border-white/10">
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
         <div className="w-full sm:w-auto">
           <label htmlFor="room-filter" className="block text-sm font-medium text-gray-300 mb-1">
@@ -49,12 +50,14 @@ const CalendarFilters: React.FC<CalendarFiltersProps> = ({
         </div>
         
         {user && (
-          <button
+          <motion.button
             onClick={onSavePreference}
             className="px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-md hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 whitespace-nowrap mt-2 sm:mt-6"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Save as Default View
-          </button>
+          </motion.button>
         )}
       </div>
       
