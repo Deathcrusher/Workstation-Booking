@@ -11,7 +11,7 @@
     "test": "jest",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "lint": "eslint . --ext ts"
+    "lint": "eslint -c .eslintrc.cjs . --ext ts"
   },
   "dependencies": {
     "@prisma/client": "^5.10.0",

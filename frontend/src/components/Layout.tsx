@@ -20,8 +20,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      <nav className="backdrop-blur-md bg-white/60 dark:bg-gray-800/60 shadow-sm border-b border-white/10">
+    <div className="min-h-screen text-gray-900 dark:text-gray-100 bg-gradient-to-br from-sky-50 via-teal-50 to-violet-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800">
+      <nav className="backdrop-blur-md bg-gradient-to-r from-cyan-500 via-sky-600 to-fuchsia-600 dark:from-gray-800 dark:to-gray-700 shadow-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex">

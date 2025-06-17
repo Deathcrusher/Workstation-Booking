@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import App from './App';
 import './styles/globals.css';
+import './styles/calendar.css';
 import ThemeProvider from './components/ThemeProvider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
