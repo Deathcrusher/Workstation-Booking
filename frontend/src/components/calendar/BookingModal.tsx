@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
 
@@ -94,29 +95,36 @@ const BookingModal = ({
     e.stopPropagation();
   }, []);
 
-  if (!isOpen) return null;
-
   return (
-    <div 
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-      onClick={handleBackdropClick}
-    >
-      <div 
-        className="bg-gray-800 rounded-lg p-6 w-full max-w-md"
-        onClick={handleModalContentClick}
-      >
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-white">
-            {existingBooking ? 'Edit Booking' : 'New Booking'}
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-white"
-            aria-label="Close modal"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          onClick={handleBackdropClick}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 w-full max-w-md border border-white/10"
+            onClick={handleModalContentClick}
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
           >
-            <XMarkIcon className="h-6 w-6" />
-          </button>
-        </div>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-white">
+                {existingBooking ? 'Edit Booking' : 'New Booking'}
+              </h2>
+              <button
+                onClick={onClose}
+                className="text-gray-400 hover:text-white"
+                aria-label="Close modal"
+              >
+                <XMarkIcon className="h-6 w-6" />
+              </button>
+            </div>
 
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
@@ -220,8 +228,10 @@ const BookingModal = ({
             </button>
           </div>
         </form>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

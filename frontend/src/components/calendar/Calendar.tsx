@@ -6,6 +6,7 @@ import {
   ChevronRightIcon,
   CalendarIcon,
 } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 import { format, addDays, subDays, startOfWeek, endOfWeek, isSameDay } from 'date-fns';
 import { de } from 'date-fns/locale';
 
@@ -73,44 +74,52 @@ const Calendar = ({ bookings, onTimeSlotClick, loading, error }: CalendarProps) 
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
-            <button
+            <motion.button
               onClick={() => setCurrentDate(subDays(currentDate, 7))}
               className="p-2 text-gray-400 hover:text-white"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               <ChevronLeftIcon className="h-5 w-5" />
-            </button>
+            </motion.button>
             <h2 className="text-lg font-semibold text-white">
               {format(weekStart, 'd. MMMM', { locale: de })} -{' '}
               {format(weekEnd, 'd. MMMM yyyy', { locale: de })}
             </h2>
-            <button
+            <motion.button
               onClick={() => setCurrentDate(addDays(currentDate, 7))}
               className="p-2 text-gray-400 hover:text-white"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               <ChevronRightIcon className="h-5 w-5" />
-            </button>
+            </motion.button>
           </div>
           <div className="flex items-center space-x-2">
-            <button
+            <motion.button
               onClick={() => setView('week')}
               className={`px-3 py-1 rounded-md ${
                 view === 'week'
                   ? 'bg-[#FF5722] text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Week
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => setView('day')}
               className={`px-3 py-1 rounded-md ${
                 view === 'day'
                   ? 'bg-[#FF5722] text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Day
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -197,43 +206,51 @@ const Calendar = ({ bookings, onTimeSlotClick, loading, error }: CalendarProps) 
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
-            <button
+            <motion.button
               onClick={() => setCurrentDate(subDays(currentDate, 1))}
               className="p-2 text-gray-400 hover:text-white"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               <ChevronLeftIcon className="h-5 w-5" />
-            </button>
+            </motion.button>
             <h2 className="text-lg font-semibold text-white">
               {format(currentDate, 'EEEE, d. MMMM yyyy', { locale: de })}
             </h2>
-            <button
+            <motion.button
               onClick={() => setCurrentDate(addDays(currentDate, 1))}
               className="p-2 text-gray-400 hover:text-white"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               <ChevronRightIcon className="h-5 w-5" />
-            </button>
+            </motion.button>
           </div>
           <div className="flex items-center space-x-2">
-            <button
+            <motion.button
               onClick={() => setView('week')}
               className={`px-3 py-1 rounded-md ${
                 view === 'week'
                   ? 'bg-[#FF5722] text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Week
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => setView('day')}
               className={`px-3 py-1 rounded-md ${
                 view === 'day'
                   ? 'bg-[#FF5722] text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Day
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -346,7 +363,7 @@ const Calendar = ({ bookings, onTimeSlotClick, loading, error }: CalendarProps) 
   }
 
   return (
-    <div className="h-full bg-gray-900 rounded-lg p-4">
+    <div className="h-full bg-gray-900/50 backdrop-blur-md rounded-2xl p-4 border border-white/10">
       {view === 'week' ? renderWeekView() : renderDayView()}
     </div>
   );

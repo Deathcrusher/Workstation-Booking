@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { logout } from '../../store/slices/authSlice';
 import ThemeToggle from '../ThemeToggle';
+import { motion } from 'framer-motion';
 import {
   HomeIcon,
   UserGroupIcon,
@@ -38,8 +39,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div className="min-h-screen bg-gray-900 dark:bg-gray-900">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-primary-700 via-primary-800 to-gray-900 dark:from-gray-800 dark:via-gray-900 dark:to-black">
-        <div className="flex h-16 items-center justify-between px-4 border-b border-gray-700">
+      <div className="fixed inset-y-0 left-0 w-64 backdrop-blur-md bg-gray-800/60 border-r border-white/10">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-white/10">
           <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
           <ThemeToggle />
         </div>
@@ -47,7 +48,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
-              <Link
+              <motion.div key={item.name} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
                 key={item.name}
                 to={item.href}
                 className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md ${
@@ -62,21 +64,24 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   }`}
                 />
                 {item.name}
-              </Link>
+                </Link>
+              </motion.div>
             );
           })}
-          <button
+          <motion.button
             onClick={handleLogout}
             className="mt-4 w-full flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-300 hover:bg-gray-700 hover:text-white"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <ArrowRightOnRectangleIcon className="mr-3 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-300" />
             Logout
-          </button>
+          </motion.button>
         </nav>
       </div>
 
       {/* Main content */}
-      <div className="pl-64 bg-gray-100 dark:bg-gray-900 min-h-screen">
+      <div className="pl-64 bg-gray-100/50 dark:bg-gray-900/50 backdrop-blur-md min-h-screen">
         <main className="py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
         </main>
