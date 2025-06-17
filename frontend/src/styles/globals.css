@@ -7,9 +7,9 @@
     @apply scroll-smooth;
   }
   body {
-    @apply min-h-screen bg-gray-50 text-gray-900 leading-relaxed font-sans;
+    @apply min-h-screen leading-relaxed font-sans text-gray-900 bg-gradient-to-br from-sky-50 via-teal-50 to-violet-100;
   }
   html[data-theme='dark'] body {
-    @apply bg-gray-900 text-gray-100;
+    @apply text-gray-100 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950;
   }
 }

@@ -13,5 +13,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
+  rules: {
+    '@typescript-eslint/no-var-requires': 'off'
+  },
   ignorePatterns: ['dist/', 'node_modules/']
 };

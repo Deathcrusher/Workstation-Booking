@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Modern FullCalendar header */
+  .fc .fc-toolbar.fc-header-toolbar {
+    @apply mb-4 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-600 to-fuchsia-600 text-white shadow-lg p-2;
+  }
+  .fc .fc-button-primary {
+    @apply bg-white/20 border-none shadow text-white hover:bg-white/30;
+  }
+  .fc .fc-button-primary:not(:disabled).fc-button-active,
+  .fc .fc-button-primary:not(:disabled):active {
+    @apply bg-white/30;
+  }
+  /* Event styling */
+  .fc-event {
+    @apply rounded-md px-1 text-xs font-medium text-white border-0 shadow-md backdrop-blur-sm bg-opacity-80;
+  }
+}

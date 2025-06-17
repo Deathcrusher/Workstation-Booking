@@ -37,10 +37,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 dark:bg-gray-900">
+    <div className="min-h-screen text-gray-100 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 backdrop-blur-md bg-gray-800/60 border-r border-white/10">
-        <div className="flex h-16 items-center justify-between px-4 border-b border-white/10">
+      <div className="fixed inset-y-0 left-0 w-64 backdrop-blur-md bg-gradient-to-b from-slate-900 via-gray-900 to-black/80 border-r border-white/10">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-white/10 bg-gradient-to-r from-cyan-500 via-sky-600 to-fuchsia-600">
           <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
           <ThemeToggle />
         </div>
@@ -81,7 +81,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       </div>
 
       {/* Main content */}
-      <div className="pl-64 bg-gray-100/50 dark:bg-gray-900/50 backdrop-blur-md min-h-screen">
+      <div className="pl-64 bg-gray-100/60 dark:bg-gray-900/60 backdrop-blur-md min-h-screen">
         <main className="py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
         </main>

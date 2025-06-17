@@ -14,6 +14,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { EventInput, EventClickArg, DateSelectArg, EventContentArg } from '@fullcalendar/core';
+import { format } from 'date-fns';
 import AdminLayout from '../components/layouts/AdminLayout';
 import Layout from '../components/Layout';
 
@@ -42,8 +43,8 @@ const SimpleModal = ({ isOpen, onClose, children }: SimpleModalProps) => {
         className="flex items-center justify-center h-full"
         onClick={handleContainerClick}
       >
-        <div 
-          className="bg-gray-800 rounded-lg p-6 shadow-2xl max-w-lg w-full border-2 border-indigo-500"
+        <div
+          className="bg-slate-900/70 backdrop-blur-lg rounded-xl p-6 shadow-2xl max-w-lg w-full border border-white/10"
         >
           {children}
         </div>
@@ -197,6 +198,23 @@ const CalendarPage = () => {
     };
   });
 
+  const renderEventContent = (arg: EventContentArg) => {
+    const start = arg.event.start ? format(arg.event.start, 'HH:mm') : '';
+    const end = arg.event.end ? format(arg.event.end, 'HH:mm') : '';
+    return (
+      <div className="flex flex-col text-xs">
+        <span className="font-semibold leading-tight">
+          {arg.event.extendedProps.bandName}
+        </span>
+        <span>
+          {start} - {end}
+        </span>
+      </div>
+    );
+  };
+
+  const eventClassNames = () => ['text-white'];
+
   const loading = bookingsLoading || roomsLoading || bandsLoading;
   const CurrentLayout = user?.role === 'ADMIN' ? AdminLayout : Layout;
 
@@ -262,15 +280,15 @@ const CalendarPage = () => {
         <div className="flex justify-end mb-4">
           <button
             onClick={openBookingModal}
-            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-md shadow"
           >
             Create New Booking
           </button>
         </div>
         
-        <div className="bg-gray-800 rounded-lg p-4 relative overflow-x-auto">
+        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 relative overflow-x-auto shadow-lg">
           {loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70 z-10 rounded-lg">
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-900 bg-opacity-70 z-10 rounded-lg">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
             </div>
           )}
@@ -286,6 +304,8 @@ const CalendarPage = () => {
               right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             }}
             events={calendarEvents}
+            eventContent={renderEventContent}
+            eventClassNames={eventClassNames}
             eventClick={handleEventClick}
             dateClick={handleDateClick}
             selectable={true}
