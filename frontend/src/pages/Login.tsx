@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
 import { login } from '../store/slices/authSlice';
+import logo from '../images/logo_0.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -33,13 +34,10 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Band Booking System
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-400">
-            Sign in to your account
-          </p>
+        <div className="text-center space-y-2">
+          <img src={logo} alt="Club Logo" className="mx-auto h-20 w-20" />
+          <h2 className="text-3xl font-extrabold text-white">Band Booking System</h2>
+          <p className="text-sm text-gray-400">Sign in to your account</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">

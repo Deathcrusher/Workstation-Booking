@@ -15,6 +15,7 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { EventInput, EventClickArg, DateSelectArg, EventContentArg } from '@fullcalendar/core';
 import { format } from 'date-fns';
+import { motion, AnimatePresence } from 'framer-motion';
 import AdminLayout from '../components/layouts/AdminLayout';
 import Layout from '../components/Layout';
 
@@ -26,30 +27,29 @@ interface SimpleModalProps {
 
 // Super simple modal component
 const SimpleModal = ({ isOpen, onClose, children }: SimpleModalProps) => {
-  if (!isOpen) return null;
-  
-  // Stop propagation at the container level
-  const handleContainerClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-  
   return (
-    <div 
-      className="fixed inset-0 z-50" 
-      style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
-      onClick={onClose}
-    >
-      <div 
-        className="flex items-center justify-center h-full"
-        onClick={handleContainerClick}
-      >
-        <div
-          className="bg-slate-900/70 backdrop-blur-lg rounded-xl p-6 shadow-2xl max-w-lg w-full border border-white/10"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         >
-          {children}
-        </div>
-      </div>
-    </div>
+          <motion.div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-slate-900/70 backdrop-blur-lg rounded-xl p-6 shadow-2xl max-w-lg w-full border border-white/10"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+          >
+            {children}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
@@ -268,7 +268,12 @@ const CalendarPage = () => {
 
   return (
     <CurrentLayout>
-      <div className="container mx-auto px-4 py-6">
+      <motion.div
+        className="container mx-auto px-4 py-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h1 className="text-2xl font-bold text-white mb-4">Calendar</h1>
         
         <CalendarFilters
@@ -278,12 +283,14 @@ const CalendarPage = () => {
         />
         
         <div className="flex justify-end mb-4">
-          <button
+          <motion.button
             onClick={openBookingModal}
             className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-md shadow"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Create New Booking
-          </button>
+          </motion.button>
         </div>
         
         <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 relative overflow-x-auto shadow-lg">
@@ -340,7 +347,7 @@ const CalendarPage = () => {
             </div>
           </div>
         </SimpleModal>
-      </div>
+      </motion.div>
     </CurrentLayout>
   );
 };
