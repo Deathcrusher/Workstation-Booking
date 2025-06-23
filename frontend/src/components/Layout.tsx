@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
                 <Link to="/" className="flex items-center space-x-2">
-                  <img src={logo} alt="Logo" className="h-8 w-8" />
+                  <img src={logo} alt="Logo" className="h-8 w-auto" />
                   <span className="text-2xl font-semibold text-gray-900 dark:text-white">Band Booking</span>
                 </Link>
               </div>

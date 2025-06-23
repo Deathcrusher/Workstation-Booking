@@ -35,7 +35,7 @@ const Login = () => {
     <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center space-y-2">
-          <img src={logo} alt="Club Logo" className="mx-auto h-20 w-20" />
+          <img src={logo} alt="Club Logo" className="mx-auto h-20 w-auto" />
           <h2 className="text-3xl font-extrabold text-white">Band Booking System</h2>
           <p className="text-sm text-gray-400">Sign in to your account</p>
         </div>
