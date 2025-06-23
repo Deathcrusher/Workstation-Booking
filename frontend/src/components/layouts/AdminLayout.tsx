@@ -5,6 +5,7 @@ import { AppDispatch } from '../../store';
 import { logout } from '../../store/slices/authSlice';
 import ThemeToggle from '../ThemeToggle';
 import { motion } from 'framer-motion';
+import logo from '../../images/logo_0.png';
 import {
   HomeIcon,
   UserGroupIcon,
@@ -41,7 +42,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       {/* Sidebar */}
       <div className="fixed inset-y-0 left-0 w-64 backdrop-blur-md bg-gradient-to-b from-muted-950 via-primary to-muted-950 border-r border-white/10">
         <div className="flex h-16 items-center justify-between px-4 border-b border-white/10 bg-gradient-to-r from-primary/80 via-primary to-primary/80">
-          <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
+          <Link to="/" className="flex items-center space-x-2">
+            <img src={logo} alt="Logo" className="h-8 w-8" />
+            <span className="text-xl font-bold text-white">Admin Dashboard</span>
+          </Link>
           <ThemeToggle />
         </div>
         <nav className="mt-5 px-2">
