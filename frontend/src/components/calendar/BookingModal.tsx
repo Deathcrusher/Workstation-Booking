@@ -150,7 +150,7 @@ const BookingModal = ({
                   newDate.setHours(parseInt(hours), parseInt(minutes));
                   setFormData({ ...formData, start: newDate.toISOString() });
                 }}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#FF5722]"
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -167,7 +167,7 @@ const BookingModal = ({
                   newDate.setHours(parseInt(hours), parseInt(minutes));
                   setFormData({ ...formData, end: newDate.toISOString() });
                 }}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#FF5722]"
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -180,7 +180,7 @@ const BookingModal = ({
                 onChange={(e) =>
                   setFormData({ ...formData, roomId: e.target.value })
                 }
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#FF5722]"
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {rooms.map((room) => (
                   <option key={room.id} value={room.id}>
@@ -199,7 +199,7 @@ const BookingModal = ({
                 onChange={(e) =>
                   setFormData({ ...formData, bandId: e.target.value })
                 }
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#FF5722]"
+                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary"
                 required
               >
                 <option value="">Select a band</option>
@@ -222,7 +222,7 @@ const BookingModal = ({
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#FF5722] text-white rounded-md hover:bg-[#F4511E] focus:outline-none focus:ring-2 focus:ring-[#FF5722] focus:ring-offset-2 focus:ring-offset-gray-800"
+              className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-800"
             >
               {existingBooking ? 'Update' : 'Create'}
             </button>

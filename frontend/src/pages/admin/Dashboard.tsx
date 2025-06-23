@@ -85,7 +85,7 @@ const AdminDashboard = () => {
     return (
       <AdminLayout>
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF5722]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
       </AdminLayout>
     );
@@ -121,7 +121,7 @@ const AdminDashboard = () => {
                 <Link
                   key={action.name}
                   to={action.href}
-                  className="relative block w-full rounded-lg border-2 border-dashed border-gray-700 p-6 text-center hover:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FF5722] focus:ring-offset-2"
+                  className="relative block w-full rounded-lg border-2 border-dashed border-gray-700 p-6 text-center hover:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
                   <action.icon className="mx-auto h-12 w-12 text-gray-400" />
                   <span className="mt-2 block text-sm font-medium text-white">
@@ -181,7 +181,7 @@ const AdminDashboard = () => {
                           ) : null}
                           <div className="relative flex space-x-3">
                             <div>
-                              <span className="h-8 w-8 rounded-full bg-[#FF5722] flex items-center justify-center ring-8 ring-gray-800">
+                              <span className="h-8 w-8 rounded-full bg-primary flex items-center justify-center ring-8 ring-gray-800">
                                 <CalendarIcon className="h-5 w-5 text-white" aria-hidden="true" />
                               </span>
                             </div>

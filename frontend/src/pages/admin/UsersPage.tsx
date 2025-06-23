@@ -158,7 +158,7 @@ const UsersPage = () => {
     return (
       <AdminLayout>
         <div className="flex justify-center items-center min-h-[60vh]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF5722]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
       </AdminLayout>
     );
@@ -189,7 +189,7 @@ const UsersPage = () => {
                 resetForm();
                 setIsModalOpen(true);
               }}
-              className="block rounded-md bg-[#FF5722] px-3 py-2 text-center text-sm font-semibold text-white hover:bg-[#F4511E]"
+              className="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold text-white hover:bg-primary/80"
             >
               <PlusIcon className="h-5 w-5 inline-block mr-1" />
               Add User
@@ -286,7 +286,7 @@ const UsersPage = () => {
                               });
                               setIsModalOpen(true);
                             }}
-                            className="text-[#FF5722] hover:text-[#F4511E] mr-4"
+                            className="text-primary hover:text-primary/80 mr-4"
                           >
                             <PencilIcon className="h-5 w-5" />
                           </button>
@@ -356,7 +356,7 @@ const UsersPage = () => {
                     }
                     className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                       formErrors.email ? 'border-red-500' : 'border-gray-600'
-                    } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                    } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                   />
                   {formErrors.email && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>
@@ -379,7 +379,7 @@ const UsersPage = () => {
                     }
                     className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                       formErrors.password ? 'border-red-500' : 'border-gray-600'
-                    } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                    } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                   />
                   {formErrors.password && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.password}</p>
@@ -399,7 +399,7 @@ const UsersPage = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, role: e.target.value as 'ADMIN' | 'BAND' })
                     }
-                    className="mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm"
+                    className="mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                   >
                     <option value="ADMIN">Admin</option>
                     <option value="BAND">Band</option>
@@ -420,7 +420,7 @@ const UsersPage = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, bandId: e.target.value })
                       }
-                      className="mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm"
+                      className="mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     >
                       <option value="">-- Select a Band --</option>
                       {bands.map((band) => (
@@ -440,13 +440,13 @@ const UsersPage = () => {
                       setEditingUser(null);
                       resetForm();
                     }}
-                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-sm font-medium text-white bg-[#FF5722] rounded-md hover:bg-[#F4511E] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     {editingUser ? 'Update User' : 'Create User'}
                   </button>
@@ -514,7 +514,7 @@ const UsersPage = () => {
                     id="resetEmail"
                     value={resetEmail}
                     onChange={(e) => setResetEmail(e.target.value)}
-                    className="mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm"
+                    className="mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
                     placeholder="Enter user email address"
                   />
                 </div>
@@ -528,13 +528,13 @@ const UsersPage = () => {
                       setResetError(null);
                       setResetSuccess(null);
                     }}
-                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-sm font-medium text-white bg-[#FF5722] rounded-md hover:bg-[#F4511E] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     Reset Password
                   </button>

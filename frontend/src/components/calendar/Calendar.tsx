@@ -100,7 +100,7 @@ const Calendar = ({ bookings, onTimeSlotClick, loading, error }: CalendarProps) 
               onClick={() => setView('week')}
               className={`px-3 py-1 rounded-md ${
                 view === 'week'
-                  ? 'bg-[#FF5722] text-white'
+                  ? 'bg-primary text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
               whileHover={{ scale: 1.05 }}
@@ -112,7 +112,7 @@ const Calendar = ({ bookings, onTimeSlotClick, loading, error }: CalendarProps) 
               onClick={() => setView('day')}
               className={`px-3 py-1 rounded-md ${
                 view === 'day'
-                  ? 'bg-[#FF5722] text-white'
+                  ? 'bg-primary text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
               whileHover={{ scale: 1.05 }}
@@ -231,7 +231,7 @@ const Calendar = ({ bookings, onTimeSlotClick, loading, error }: CalendarProps) 
               onClick={() => setView('week')}
               className={`px-3 py-1 rounded-md ${
                 view === 'week'
-                  ? 'bg-[#FF5722] text-white'
+                  ? 'bg-primary text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
               whileHover={{ scale: 1.05 }}
@@ -243,7 +243,7 @@ const Calendar = ({ bookings, onTimeSlotClick, loading, error }: CalendarProps) 
               onClick={() => setView('day')}
               className={`px-3 py-1 rounded-md ${
                 view === 'day'
-                  ? 'bg-[#FF5722] text-white'
+                  ? 'bg-primary text-white'
                   : 'text-gray-400 hover:text-white'
               }`}
               whileHover={{ scale: 1.05 }}

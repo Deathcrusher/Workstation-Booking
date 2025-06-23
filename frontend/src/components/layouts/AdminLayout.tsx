@@ -37,10 +37,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen text-gray-100 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800">
+    <div className="min-h-screen text-gray-100 bg-gradient-to-br from-muted-950 via-accent to-muted-950">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 backdrop-blur-md bg-gradient-to-b from-slate-900 via-gray-900 to-black/80 border-r border-white/10">
-        <div className="flex h-16 items-center justify-between px-4 border-b border-white/10 bg-gradient-to-r from-cyan-500 via-sky-600 to-fuchsia-600">
+      <div className="fixed inset-y-0 left-0 w-64 backdrop-blur-md bg-gradient-to-b from-muted-950 via-primary to-muted-950 border-r border-white/10">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-white/10 bg-gradient-to-r from-primary/80 via-primary to-primary/80">
           <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
           <ThemeToggle />
         </div>
@@ -60,7 +60,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               >
                 <item.icon
                   className={`mr-3 h-6 w-6 flex-shrink-0 ${
-                    isActive ? 'text-[#FF5722]' : 'text-gray-400 group-hover:text-gray-300'
+                    isActive ? 'text-primary' : 'text-gray-400 group-hover:text-gray-300'
                   }`}
                 />
                 {item.name}
