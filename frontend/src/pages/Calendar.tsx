@@ -310,9 +310,12 @@ const CalendarPage = () => {
               center: 'title',
               right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             }}
+            stickyHeaderDates={true}
             events={calendarEvents}
             eventContent={renderEventContent}
             eventClassNames={eventClassNames}
+            eventTimeFormat={{ hour: '2-digit', minute: '2-digit', hour12: false }}
+            slotLabelFormat={{ hour: '2-digit', minute: '2-digit', hour12: false }}
             eventClick={handleEventClick}
             dateClick={handleDateClick}
             selectable={true}
