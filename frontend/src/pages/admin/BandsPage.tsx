@@ -142,7 +142,7 @@ const BandsPage = () => {
     return (
       <AdminLayout>
         <div className="flex justify-center items-center min-h-[60vh]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF5722]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
       </AdminLayout>
     );
@@ -191,7 +191,7 @@ const BandsPage = () => {
                 setSubmitError(null);
                 setIsModalOpen(true);
               }}
-              className="block rounded-md bg-[#FF5722] px-3 py-2 text-center text-sm font-semibold text-white hover:bg-[#F4511E]"
+              className="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold text-white hover:bg-primary/80"
             >
               <PlusIcon className="h-5 w-5 inline-block mr-1" />
               Add Band
@@ -272,7 +272,7 @@ const BandsPage = () => {
                               setSubmitError(null);
                               setIsModalOpen(true);
                             }}
-                            className="text-[#FF5722] hover:text-[#F4511E] mr-4"
+                            className="text-primary hover:text-primary/80 mr-4"
                           >
                             <PencilIcon className="h-5 w-5" />
                           </button>
@@ -339,7 +339,7 @@ const BandsPage = () => {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                       formErrors.name ? 'border-red-500' : 'border-gray-600'
-                    } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                    } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                   />
                   {formErrors.name && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>
@@ -357,7 +357,7 @@ const BandsPage = () => {
                     onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
                     className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                       formErrors.contactEmail ? 'border-red-500' : 'border-gray-600'
-                    } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                    } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                   />
                   {formErrors.contactEmail && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.contactEmail}</p>
@@ -374,13 +374,13 @@ const BandsPage = () => {
                       setFormErrors({});
                       setSubmitError(null);
                     }}
-                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-sm font-medium text-white bg-[#FF5722] rounded-md hover:bg-[#F4511E] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     {editingBand ? 'Update Band' : 'Create Band'}
                   </button>
@@ -413,7 +413,7 @@ const BandsPage = () => {
                         onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
                         className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                           userErrors.email ? 'border-red-500' : 'border-gray-600'
-                        } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                        } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                       />
                       {userErrors.email && (
                         <p className="mt-1 text-sm text-red-500">{userErrors.email}</p>
@@ -431,7 +431,7 @@ const BandsPage = () => {
                         onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                         className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                           userErrors.password ? 'border-red-500' : 'border-gray-600'
-                        } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                        } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                       />
                       {userErrors.password && (
                         <p className="mt-1 text-sm text-red-500">{userErrors.password}</p>
@@ -441,7 +441,7 @@ const BandsPage = () => {
                     <div className="flex justify-end">
                       <button
                         type="submit"
-                        className="px-4 py-2 text-sm font-medium text-white bg-[#FF5722] rounded-md hover:bg-[#F4511E] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                        className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                       >
                         Add User
                       </button>

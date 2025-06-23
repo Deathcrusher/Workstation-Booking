@@ -12,6 +12,7 @@ export default {
       },
       colors: {
         primary: 'hsl(var(--color-primary))',
+        accent: 'hsl(var(--color-primary) / 0.3)',
         muted: {
           50: 'hsl(var(--color-muted-50))',
           950: 'hsl(var(--color-muted-950))',

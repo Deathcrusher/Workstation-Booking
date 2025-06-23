@@ -3,13 +3,37 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: 222 90% 60%;
+    --color-muted-50: 210 100% 98%;
+    --color-muted-950: 222 35% 10%;
+  }
+
+  html[data-theme='dark'] {
+    --color-primary: 222 90% 70%;
+    --color-muted-50: 222 20% 15%;
+    --color-muted-950: 222 10% 5%;
+  }
+
   html {
     @apply scroll-smooth;
   }
   body {
-    @apply min-h-screen leading-relaxed font-sans text-gray-900 bg-gradient-to-br from-sky-50 via-teal-50 to-violet-100;
+    @apply min-h-screen leading-relaxed font-sans text-gray-900;
+    background: linear-gradient(
+      to bottom right,
+      hsl(var(--color-muted-50)),
+      hsl(var(--color-primary) / 0.3),
+      hsl(var(--color-muted-50))
+    );
   }
   html[data-theme='dark'] body {
-    @apply text-gray-100 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950;
+    @apply text-gray-100;
+    background: linear-gradient(
+      to bottom right,
+      hsl(var(--color-muted-950)),
+      hsl(var(--color-primary) / 0.3),
+      hsl(var(--color-muted-950))
+    );
   }
 }

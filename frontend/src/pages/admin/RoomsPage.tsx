@@ -23,7 +23,7 @@ const RoomsPage = () => {
     name: '',
     location: '',
     features: [] as string[],
-    color: '#FF5722',
+    color: '#3B82F6',
     bandIds: [] as string[],
   });
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
@@ -97,7 +97,7 @@ const RoomsPage = () => {
         name: '',
         location: '',
         features: [],
-        color: '#FF5722',
+        color: '#3B82F6',
         bandIds: [],
       });
       setFormErrors({});
@@ -139,7 +139,7 @@ const RoomsPage = () => {
     return (
       <AdminLayout>
         <div className="flex justify-center items-center min-h-[60vh]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF5722]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
       </AdminLayout>
     );
@@ -187,12 +187,12 @@ const RoomsPage = () => {
                   name: '',
                   location: '',
                   features: [],
-                  color: '#FF5722',
+                  color: '#3B82F6',
                   bandIds: [],
                 });
                 setIsModalOpen(true);
               }}
-              className="block rounded-md bg-[#FF5722] px-3 py-2 text-center text-sm font-semibold text-white hover:bg-[#F4511E]"
+              className="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold text-white hover:bg-primary/80"
             >
               <PlusIcon className="h-5 w-5 inline-block mr-1" />
               Add Room
@@ -301,7 +301,7 @@ const RoomsPage = () => {
                                 });
                                 setIsModalOpen(true);
                               }}
-                              className="text-[#FF5722] hover:text-[#F4511E] mr-4"
+                              className="text-primary hover:text-primary/80 mr-4"
                             >
                               <PencilIcon className="h-5 w-5" />
                             </button>
@@ -338,7 +338,7 @@ const RoomsPage = () => {
                       name: '',
                       location: '',
                       features: [],
-                      color: '#FF5722',
+                      color: '#3B82F6',
                       bandIds: [],
                     });
                     setFormErrors({});
@@ -375,7 +375,7 @@ const RoomsPage = () => {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                       formErrors.name ? 'border-red-500' : 'border-gray-600'
-                    } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                    } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                   />
                   {formErrors.name && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>
@@ -393,7 +393,7 @@ const RoomsPage = () => {
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 bg-gray-700 text-white border ${
                       formErrors.location ? 'border-red-500' : 'border-gray-600'
-                    } focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722] sm:text-sm`}
+                    } focus:outline-none focus:ring-primary focus:border-primary sm:text-sm`}
                   />
                   {formErrors.location && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.location}</p>
@@ -411,7 +411,7 @@ const RoomsPage = () => {
                           type="checkbox"
                           checked={formData.features.includes(feature)}
                           onChange={() => handleFeatureChange(feature)}
-                          className="rounded border-gray-600 text-[#FF5722] focus:ring-[#FF5722] bg-gray-700"
+                          className="rounded border-gray-600 text-primary focus:ring-primary bg-gray-700"
                         />
                         <span className="ml-2 text-sm text-gray-300">{feature}</span>
                       </label>
@@ -431,7 +431,7 @@ const RoomsPage = () => {
                     id="color"
                     value={formData.color}
                     onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-                    className="mt-1 block w-full h-10 rounded-md shadow-sm border border-gray-600 focus:outline-none focus:ring-[#FF5722] focus:border-[#FF5722]"
+                    className="mt-1 block w-full h-10 rounded-md shadow-sm border border-gray-600 focus:outline-none focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -445,19 +445,19 @@ const RoomsPage = () => {
                         name: '',
                         location: '',
                         features: [],
-                        color: '#FF5722',
+                        color: '#3B82F6',
                         bandIds: [],
                       });
                       setFormErrors({});
                       setSubmitError(null);
                     }}
-                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-sm font-medium text-white bg-[#FF5722] rounded-md hover:bg-[#F4511E] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
+                    className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-md hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   >
                     {editingRoom ? 'Update Room' : 'Create Room'}
                   </button>
