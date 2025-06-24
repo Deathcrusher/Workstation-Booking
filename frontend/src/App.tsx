@@ -10,6 +10,7 @@ import AdminRoute from './components/AdminRoute';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Calendar from './pages/Calendar';
+import ModernCalendar from './pages/ModernCalendar';
 import Bands from './pages/admin/Bands';
 import RoomsPage from './pages/admin/RoomsPage';
 import UsersPage from './pages/admin/UsersPage';
@@ -58,6 +59,16 @@ const App = () => {
             <PrivateRoute>
               <Layout>
                 <Calendar />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/calendar-modern"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <ModernCalendar />
               </Layout>
             </PrivateRoute>
           }
