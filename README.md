@@ -267,7 +267,7 @@ band-booking-system/
 
 The login page features a gradient background with a glass‑morphic card, translucent input fields and a vibrant sign‑in button.
 
-![Login Preview](frontend/screenshots/login_preview.png)
+![Login Preview](frontend/screenshots/login_preview_with_logo.png)
 
 ### Calendar View
 
