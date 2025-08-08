@@ -21,6 +21,20 @@ dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
+/*
+ * Always ensure a default administrator account exists.  The helper
+ * `ensureDefaultAdmin` will create the admin user if one with the
+ * hard‑coded credentials (`admin@admin.com` / `admin`) is missing.  By
+ * invoking this outside of the conditional `require.main` check, the
+ * admin is seeded on module import as well as when the server is
+ * started via `node dist/index.js` or `ts-node src/index.ts`.  Any
+ * errors will be logged but will not prevent the application from
+ * continuing to start.
+ */
+ensureDefaultAdmin(prisma).catch((err) => {
+  console.error('Failed to ensure default admin', err);
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
