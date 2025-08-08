@@ -3,16 +3,18 @@ import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 
 export async function ensureDefaultAdmin(prisma: PrismaClient): Promise<void> {
-  // Hard‑coded credentials for the default administrator. These values
-  // should only be used in development or initial bootstrapping; in
-  // production you should change them immediately after the first
-  // login.
-  const email = 'admin@admin.com';
-  const password = 'admin';
+  /*
+   * Determine the credentials for the bootstrap administrator. In production,
+   * these should be provided via environment variables to avoid using
+   * predictable defaults. If the environment variables are absent, fall
+   * back to sensible defaults. See `README.md` for deployment guidance.
+   */
+  const email = process.env.DEFAULT_ADMIN_EMAIL || 'admin@admin.com';
+  const plaintextPassword = process.env.DEFAULT_ADMIN_PASSWORD || 'admin';
 
   // Hash the plain‑text password once up front. Using a constant salt
   // rounds ensures consistent hashing across environments.
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(plaintextPassword, 10);
 
   try {
     // Use upsert so that if an admin user already exists we update its
@@ -34,9 +36,7 @@ export async function ensureDefaultAdmin(prisma: PrismaClient): Promise<void> {
     });
     console.log('Default admin user ensured');
   } catch (error) {
-    // Swallow unique constraint errors silently to avoid crashing on
-    // startup. All other errors are rethrown so they can be caught
-    // upstream.
+    // Re-throw errors so that upstream callers can decide how to handle them.
     throw error;
   }
 }

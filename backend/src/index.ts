@@ -1,5 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import { ensureDefaultAdmin } from './utils/ensureAdmin';
@@ -37,6 +39,13 @@ ensureDefaultAdmin(prisma).catch((err) => {
 
 // Middleware
 app.use(cors());
+// Use Helmet to help secure Express apps by setting various HTTP headers.
+// Helmet is a collection of small middleware functions that set different HTTP
+// response headers for security. See Express security best practices【216966032337858†L97-L115】.
+app.use(helmet());
+// Use gzip compression middleware to reduce the size of the response body and
+// improve performance【544840395305597†L95-L120】.
+app.use(compression());
 app.use(express.json());
 
 // Public routes
