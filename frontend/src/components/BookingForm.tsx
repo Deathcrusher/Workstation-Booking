@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState, AppDispatch } from '../store';
@@ -23,6 +24,9 @@ const BookingForm = memo(({ selectedDate, onClose, existingBooking, rooms, bands
   const { loading: bandsLoading, error: bandsError } = useSelector((state: RootState) => state.bands);
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { error: bookingError, loading: bookingLoading } = useSelector((state: RootState) => state.bookings);
+
+  // Internationalization hook
+  const { t } = useTranslation();
 
   // Get initial room preference from localStorage
   const roomPreference = localStorage.getItem('preferredRoomId');
@@ -260,21 +264,21 @@ const BookingForm = memo(({ selectedDate, onClose, existingBooking, rooms, bands
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 text-white">
+    <form onSubmit={handleSubmit} className="space-y-6 text-gray-900 dark:text-white">
       <div>
         <label htmlFor="room" className="block text-sm font-medium text-white">
-          Room
+          {t('Room')}
         </label>
         <select
           id="room"
           name="room"
-          className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-600 text-white ${
-            errors.roomId ? 'border-red-500' : 'border-gray-500'
+          className={`mt-1 block w-full rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm bg-white/10 dark:bg-slate-700/40 backdrop-blur-md text-white ${
+            errors.roomId ? 'border-red-500' : 'border-white/30'
           }`}
           value={formData.roomId}
           onChange={handleRoomChange}
         >
-          <option value="">Select a room</option>
+          <option value="">{t('Select a room')}</option>
           {rooms.map((room) => (
             <option key={room.id} value={room.id}>
               {room.name}
@@ -288,19 +292,19 @@ const BookingForm = memo(({ selectedDate, onClose, existingBooking, rooms, bands
 
       <div>
         <label htmlFor="band" className="block text-sm font-medium text-white">
-          Band
+          {t('Band')}
         </label>
         <select
           id="band"
           name="band"
-          className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-600 text-white ${
-            errors.bandId ? 'border-red-500' : 'border-gray-500'
+          className={`mt-1 block w-full rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm bg-white/10 dark:bg-slate-700/40 backdrop-blur-md text-white ${
+            errors.bandId ? 'border-red-500' : 'border-white/30'
           }`}
           value={formData.bandId}
           onChange={handleBandChange}
           disabled={user?.role === 'BAND'} // Disable for band members
         >
-          <option value="">Select a band</option>
+          <option value="">{t('Select a band')}</option>
           {bands.map((band) => (
             <option key={band.id} value={band.id}>
               {band.name}
@@ -314,18 +318,18 @@ const BookingForm = memo(({ selectedDate, onClose, existingBooking, rooms, bands
 
       <div>
         <label htmlFor="start" className="block text-sm font-medium text-white">
-          Start Time
+          {t('Start Time')}
         </label>
         <select
           id="start"
           name="start"
-          className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-600 text-white ${
-            errors.start ? 'border-red-500' : 'border-gray-500'
+          className={`mt-1 block w-full rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm bg-white/10 dark:bg-slate-700/40 backdrop-blur-md text-white ${
+            errors.start ? 'border-red-500' : 'border-white/30'
           }`}
           value={formData.start}
           onChange={handleStartChange}
         >
-          <option value="">Select start time</option>
+          <option value="">{t('Select start time')}</option>
           {timeSlots.map((time) => (
             <option key={time.toISOString()} value={time.toISOString()}>
               {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -339,18 +343,18 @@ const BookingForm = memo(({ selectedDate, onClose, existingBooking, rooms, bands
 
       <div>
         <label htmlFor="end" className="block text-sm font-medium text-white">
-          End Time
+          {t('End Time')}
         </label>
         <select
           id="end"
           name="end"
-          className={`mt-1 block w-full rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-600 text-white ${
-            errors.end ? 'border-red-500' : 'border-gray-500'
+          className={`mt-1 block w-full rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm bg-white/10 dark:bg-slate-700/40 backdrop-blur-md text-white ${
+            errors.end ? 'border-red-500' : 'border-white/30'
           }`}
           value={formData.end}
           onChange={handleEndChange}
         >
-          <option value="">Select end time</option>
+          <option value="">{t('Select end time')}</option>
           {timeSlots.map((time) => (
             <option key={time.toISOString()} value={time.toISOString()}>
               {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -366,16 +370,16 @@ const BookingForm = memo(({ selectedDate, onClose, existingBooking, rooms, bands
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex justify-center py-2 px-4 border border-gray-500 shadow-sm text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
         >
-          Cancel
+          {t('Cancel')}
         </button>
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          className={`inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${submitting ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
-          {submitting ? 'Saving...' : existingBooking ? 'Update Booking' : 'Create Booking'}
+          {submitting ? t('Saving...') : existingBooking ? t('Update Booking') : t('Create Booking')}
         </button>
       </div>
     </form>

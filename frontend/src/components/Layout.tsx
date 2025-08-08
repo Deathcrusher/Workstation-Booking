@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../store';
 import { logout } from '../store/slices/authSlice';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import logo from '../images/logo_0.png';
 
 interface LayoutProps {
@@ -14,6 +16,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
+
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -39,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                       to="/"
                       className="border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                     >
-                      Dashboard
+                      {t('Dashboard')}
                     </Link>
                   </motion.div>
                   {user?.role === 'ADMIN' && (
@@ -49,7 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                           to="/admin/bands"
                           className="border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                         >
-                          Bands
+                          {t('Bands')}
                         </Link>
                       </motion.div>
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -57,7 +61,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                           to="/admin/rooms"
                           className="border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                         >
-                          Rooms
+                          {t('Rooms')}
                         </Link>
                       </motion.div>
                     </>
@@ -66,6 +70,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               )}
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+              <LanguageToggle />
               <ThemeToggle />
               {isAuthenticated ? (
                 <motion.button

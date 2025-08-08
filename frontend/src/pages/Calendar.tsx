@@ -16,6 +16,10 @@ import listPlugin from '@fullcalendar/list';
 import { EventInput, EventClickArg, DateSelectArg, EventContentArg } from '@fullcalendar/core';
 import { format } from 'date-fns';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+// Import German locale for FullCalendar. When the user's language is set to "de",
+// this locale will provide translated button text (e.g., Monat, Woche, Tag, Liste).
+import deLocale from '@fullcalendar/core/locales/de';
 import AdminLayout from '../components/layouts/AdminLayout';
 import Layout from '../components/Layout';
 
@@ -67,6 +71,9 @@ const CalendarPage = () => {
     (state: RootState) => state.bands
   );
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  // t: translation function; i18n: holds the current language setting.
+  const { t, i18n } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBooking, setEditingBooking] = useState<Booking | null>(null);
@@ -274,7 +281,7 @@ const CalendarPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-2xl font-bold text-white mb-4">Calendar</h1>
+        <h1 className="text-2xl font-bold text-white mb-4">{t('Calendar')}</h1>
         
         <CalendarFilters
           selectedRoomId={selectedRoomId}
@@ -289,7 +296,7 @@ const CalendarPage = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Create New Booking
+            {t('Create New Booking')}
           </motion.button>
         </div>
         
@@ -310,6 +317,22 @@ const CalendarPage = () => {
               center: 'title',
               right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             }}
+            // Override button labels with translations for month, week, day and list views.
+            buttonText={{
+              today: t('Today'),
+              month: t('Month'),
+              week: t('Week'),
+              day: t('Day'),
+              list: t('List'),
+            }}
+            // Provide locales and locale settings so the calendar's button
+            // labels (month/week/day/list) are translated based on the user's
+            // selected language. When the current language is "de", the German
+            // locale supplied here will translate those labels to "Monat", "Woche",
+            // "Tag" and "Liste" respectively. Otherwise, FullCalendar falls back
+            // to its default English messages.
+            locales={[deLocale]}
+            locale={i18n.language}
             stickyHeaderDates={true}
             events={calendarEvents}
             eventContent={renderEventContent}

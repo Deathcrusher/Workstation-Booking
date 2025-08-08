@@ -13,6 +13,9 @@ A web application for managing band rehearsal room bookings, built with React, N
 - Color-coded room management
 - Responsive design with Tailwind CSS
 - Booking creation and management system
+ - **Modern UI** – glass‑morphic cards, gradient backgrounds and a dark/light theme toggle give the app a contemporary feel.
+ - **Internationalisation** – full English and German language support with a language selector in the navigation bar.
+ - **Improved Calendar** – vibrant header colours, soft grid backgrounds and translated view buttons (Monat/Woche/Tag/Liste) for a more intuitive booking experience.
 
 ## Tech Stack
 
@@ -257,6 +260,20 @@ band-booking-system/
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
+
+## Screenshots
+
+### Login Page
+
+The login page features a gradient background with a glass‑morphic card, translucent input fields and a vibrant sign‑in button.
+
+![Login Preview](frontend/screenshots/login_preview.png)
+
+### Calendar View
+
+The calendar view has a colourful header and a softened grid.  View buttons are translated when switching languages (Monat/Woche/Tag/Liste), and events appear as coloured cards.
+
+![Calendar Preview](frontend/screenshots/calendar_preview.png)
 
 ## License
 

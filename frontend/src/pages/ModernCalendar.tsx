@@ -10,6 +10,7 @@ import { fetchBands } from '../store/slices/bandSlice';
 import { RootState, AppDispatch } from '../store';
 import Layout from '../components/Layout';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const locales = {
   'de': de,
@@ -33,6 +34,9 @@ const ModernCalendar = () => {
   const { bookings } = useSelector((state: RootState) => state.bookings);
   const { rooms } = useSelector((state: RootState) => state.rooms);
   const { bands } = useSelector((state: RootState) => state.bands);
+
+  // t: translation function; i18n: holds current language ("en" or "de")
+  const { t, i18n } = useTranslation();
 
   const [events, setEvents] = useState<Event[]>([]);
 
@@ -63,7 +67,7 @@ const ModernCalendar = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-2xl font-bold text-white mb-4">Modern Calendar</h1>
+        <h1 className="text-2xl font-bold text-white mb-4">{t('Modern Calendar')}</h1>
         <div className="bg-slate-900/60 backdrop-blur-md p-4 rounded-xl border border-white/10 shadow-lg">
           <Calendar
             localizer={localizer}
@@ -71,8 +75,25 @@ const ModernCalendar = () => {
             startAccessor="start"
             endAccessor="end"
             style={{ height: 600 }}
+            // Provide the current culture so the calendar's headings follow the
+            // selected language (e.g., Monday vs. Montag).
+            culture={i18n.language}
+            // Only show month, week and day views
             views={[Views.MONTH, Views.WEEK, Views.DAY]}
             popup
+            // Override navigation and view labels with translated strings
+            messages={{
+              next: t('Next'),
+              previous: t('Previous'),
+              today: t('Today'),
+              month: t('Month'),
+              week: t('Week'),
+              day: t('Day'),
+              agenda: t('Agenda'),
+              date: t('Date'),
+              time: t('Time'),
+              noEventsInRange: t('No events in range'),
+            }}
           />
         </div>
       </motion.div>
