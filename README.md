@@ -261,19 +261,7 @@ band-booking-system/
 4. Push to the branch
 5. Create a Pull Request
 
-## Screenshots
-
-### Login Page
-
-The login page features a gradient background with a glass‑morphic card, translucent input fields and a vibrant sign‑in button.
-
-![Login Preview](frontend/screenshots/login_preview_with_logo.png)
-
-### Calendar View
-
-The calendar view has a colourful header and a softened grid.  View buttons are translated when switching languages (Monat/Woche/Tag/Liste), and events appear as coloured cards.
-
-![Calendar Preview](frontend/screenshots/calendar_preview.png)
+<!-- Removed image previews to avoid confusion – to see the updated design, run the application locally or open the preview HTML files under the project root. -->
 
 ## License
 
